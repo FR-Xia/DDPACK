@@ -1,0 +1,4 @@
+Measured 2026-11-16, Asia/Shanghai. Windows 11; Intel Core i5-12500H; MSVC 19.44 Release x64; Eigen 5.0.0; C++17.
+MATLAB threading is recorded in matlab_environment.txt. Sequential MATLAB then C++; no concurrent solver or compilation jobs.
+3 warmups, 5 repeats, quantiles via NumPy linear interpolation; descriptive timing only.
+Analysis: Python 3.12.14, NumPy 2.3.5, Matplotlib 3.9.2.

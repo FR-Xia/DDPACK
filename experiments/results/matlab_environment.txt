@@ -1,0 +1,6 @@
+MATLAB 23.2.0.2365128 (R2023b)
+Architecture PCWIN64
+Threads 1
+3 warmups + 5 measured solves per case; RNG restored before each solve.
+Timed: public solve, validation, diagnostics, captured MATLAB console output.
+Excluded: setup, RNG reset, plots, file output, MATLAB startup and native compilation.

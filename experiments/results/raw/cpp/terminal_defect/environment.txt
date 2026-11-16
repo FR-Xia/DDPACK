@@ -1,0 +1,3 @@
+DDPACK native C++17
+Eigen 5.0.0
+MSVC 1944

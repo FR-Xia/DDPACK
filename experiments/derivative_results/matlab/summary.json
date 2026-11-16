@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "formal_cases": 9,
+  "probe_points_per_case": 3,
+  "stencil_widths": [
+    0.0001,
+    1E-5,
+    1E-6
+  ],
+  "reports": 81,
+  "checks": 1755,
+  "failed_checks": 0,
+  "matlab_version": "23.2.0.2365128 (R2023b)",
+  "maximum_tolerance_ratio": 0.10841711504573223
+}

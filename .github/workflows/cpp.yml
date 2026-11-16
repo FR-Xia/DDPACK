@@ -1,0 +1,64 @@
+name: Native C++
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install Eigen on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libeigen3-dev
+      - name: Install Eigen on macOS
+        if: runner.os == 'macOS'
+        run: brew install eigen
+      - name: Install Eigen on Windows
+        if: runner.os == 'Windows'
+        run: vcpkg install eigen3:x64-windows
+      - name: Configure (Unix)
+        if: runner.os != 'Windows'
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Configure (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: cmake -S . -B build -A x64 -T host=x64 "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake"
+      - run: cmake --build build --config Release --parallel 2
+      - run: ctest --test-dir build -C Release --output-on-failure
+      - name: Install native library
+        run: cmake --install build --config Release --prefix install-native
+      - name: Configure installed-library consumer
+        if: runner.os != 'Windows'
+        run: cmake -S cpp/tests/consumer -B build-consumer -DCMAKE_PREFIX_PATH=${{ github.workspace }}/install-native
+      - name: Configure installed-library consumer (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: cmake -S cpp/tests/consumer -B build-consumer -A x64 "-DCMAKE_PREFIX_PATH=${{ github.workspace }}/install-native" "-DCMAKE_TOOLCHAIN_FILE=$env:VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake"
+      - run: cmake --build build-consumer --config Release
+      - name: Run consumer (Unix)
+        if: runner.os != 'Windows'
+        run: ./build-consumer/consumer
+      - name: Run consumer (Windows)
+        if: runner.os == 'Windows'
+        run: ./build-consumer/Release/consumer.exe
+  reference-regeneration:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v6
+      - run: sudo apt-get update && sudo apt-get install -y libeigen3-dev
+      - uses: matlab-actions/setup-matlab@v3
+        with:
+          release: R2023b
+      - uses: matlab-actions/run-command@v3
+        with:
+          command: addpath('matlab/tools'); export_cpp_reference(fullfile('artifacts','ci_reference'))
+      - run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build build --parallel 2
+      - name: Compare with freshly regenerated MATLAB results
+        run: ./build/ddpack_parity artifacts/ci_reference

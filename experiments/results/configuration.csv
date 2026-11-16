@@ -1,0 +1,10 @@
+problem,algorithm,max_iterations,alpha,epsilon,rho,update_epsilon,tf,dt,geometric_refinement_iterations,geometric_refinement_knots,geometric_control_rate_weight,geometric_refinement_free_time,minimum_time,maximum_time,state_dimension,control_dimension,state_samples
+vibration,free_time_pddp,80,0.2,0.2,0.05,0.95,15,0.3,0,12,0.02,False,0,0,2,1,50
+planar,waypoint_pddp,100,0.4,0.2,0.05,0.95,5,0.05,0,12,0.02,False,0,0,2,1,100
+terminal_defect,terminal_defect_pddp,80,0.2,0.2,0.05,0.95,10,0.2,0,12,0.02,False,0,0,3,1,50
+obstacle_2d,geometric_safety_pddp_2d,80,0.2,0.2,0.05,0.95,10,0.2,80,12,0.02,True,5,6,3,1,50
+obstacle_3d,geometric_safety_pddp_3d,80,0.2,0.2,0.05,0.95,5,0.1,80,12,0.02,True,5,6,6,2,50
+reactor,penalty_free_time_ddp,80,0.25,0.2,0.05,0.95,15,0.3,0,12,0.02,False,0,0,1,1,51
+pendulum,waypoint_pddp,120,0.4,0.2,0.05,0.95,5,0.05,0,12,0.02,False,0,0,2,1,100
+thermal,penalty_free_time_ddp,220,0.2,0.2,0.05,0.95,15,0.3,0,12,0.02,False,0,0,1,1,51
+storage,penalty_free_time_ddp,100,0.2,0.2,0.05,0.95,15,0.3,0,12,0.02,False,0,0,1,1,51

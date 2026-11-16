@@ -1,0 +1,50 @@
+name: DDPACK CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  repository-checks:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Check required files and private paths
+        shell: bash
+        run: |
+          test -f README.md
+          test -f README.rst
+          test -f Licence.txt
+          test -f LICENSE.txt
+          test -f CITATION.cff
+          test -f codemeta.json
+          test -f docs/VALIDATION.rst
+          test ! -e HANDOFF.md
+          test ! -e manuscript
+          test ! -e submission
+          ! grep -RInE '[A-Za-z]:\\Users\\|/home/[^/]+/|/Users/[^/]+' \
+            matlab/src matlab/examples matlab/tests matlab/benchmarks matlab/tools
+      - name: Verify published derivative evidence and source bindings
+        run: python3 experiments/check_derivative_evidence.py
+
+  matlab-tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: matlab-actions/setup-matlab@v3
+        with:
+          release: R2023b
+      - name: Run unit, regression, integration, and documentation tests
+        uses: matlab-actions/run-command@v3
+        with:
+          command: addpath('matlab/tests'); execute_test_suite('OutputDir',fullfile('artifacts','ci_tests'))
+      - name: Run formal example smoke tests
+        uses: matlab-actions/run-command@v3
+        with:
+          command: addpath('matlab/tools'); setup_ddpack('IncludeExamples',true); run_publication_examples('OutputDir',fullfile('artifacts','ci_examples'),'Visible',false,'QuickMode',false)
+      - name: Audit formal model derivative contracts at multiple points and steps
+        uses: matlab-actions/run-command@v3
+        with:
+          command: addpath('matlab/tools'); run_derivative_audit(fullfile('artifacts','ci_derivatives'))

@@ -1,0 +1,7 @@
+DDPACK source license inventory
+Copyright holder: Feiran Xia
+Affiliation: Beijing Institute of Technology
+License: BSD-3-Clause
+Files: 161
+File notices requiring review: 0
+External dependencies: see docs/SOURCE_LICENSES.rst

@@ -1,0 +1,16 @@
+{
+  "x0": 2,
+  "target": 0.032535,
+  "u_max": 1.5,
+  "Q_f": 120,
+  "Q_s": 2.5,
+  "R": 0.25,
+  "tf": 15,
+  "dt": 0.3,
+  "algorithm": "penalty_free_time_ddp",
+  "max_iterations": 220,
+  "alpha": 0.2,
+  "epsilon": 0.2,
+  "rho": 0.05,
+  "update_epsilon": 0.95
+}

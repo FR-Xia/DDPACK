@@ -1,0 +1,48 @@
+{
+  "software_version": "1.1.0",
+  "verification_date": "2026-11-16",
+  "matlab_tests": {
+    "total": 100,
+    "passed": 100,
+    "failed": 0,
+    "incomplete": 0,
+    "skipped": 0,
+    "runtime_seconds": 72.4841011,
+    "matlab_version": "23.2.0.2365128 (R2023b)",
+    "ddpack_version": "1.1.0"
+  },
+  "native_ctest": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0
+  },
+  "formal_examples": {
+    "total": 9,
+    "passed": 9
+  },
+  "fresh_native_build": true,
+  "native_installation_consumer_passed": true,
+  "fresh_matlab_reference_parity_passed": true,
+  "derivative_checks": {
+    "matlab": 1755,
+    "cpp": 1314,
+    "probes_per_language": 81
+  },
+  "source_evidence": {
+    "source_license_files": 161,
+    "derivative_source_bindings": 162,
+    "paired_source_bindings": 137,
+    "matlab_reference_bindings": 61
+  },
+  "paired_measurements": {
+    "cases": 9,
+    "warmups": 3,
+    "measured_repeats": 5,
+    "matlab": 45,
+    "cpp": 45,
+    "sequential": true
+  },
+  "recorded_local_platform": "Windows x64; MATLAB R2023b; MSVC 19.44 Release; Eigen 5.0.0",
+  "ci_results_url": "https://github.com/FR-Xia/DDPACK/actions",
+  "scope": "Specified deterministic examples and local numerical checks; full continuous-model pendulum/thermal endpoints may exceed tolerances."
+}

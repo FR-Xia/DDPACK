@@ -1,0 +1,27 @@
+* text=auto
+# Computational source hashes are byte-exact. Preserve their original bytes
+# on every platform instead of changing CRLF/LF when Git adds or checks out.
+*.m -text
+*.cpp -text
+*.hpp -text
+*.py -text
+*.cmake -text
+*.cmake.in -text
+*.ps1 -text
+CMakeLists.txt -text
+*.md text eol=lf
+*.rst text eol=lf
+*.tex text eol=lf
+*.bib text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.mat binary
+*.png binary
+*.pdf binary
+*.zip binary
+# Keep recorded numerical inputs and their byte hashes stable in archives.
+*.csv -text
+experiments/results/raw/** -text
+experiments/geometry_results/raw/** -text
+experiments/results/*_environment.txt -text

@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use DDPACK, please cite this software release."
+title: "DDPACK: A MATLAB and C++ package for finite-horizon nonlinear optimal control"
+type: software
+version: 1.1.0
+authors:
+  - family-names: "Xia"
+    given-names: "Feiran"
+    affiliation: "Beijing Institute of Technology"
+    email: "beihesanx@gmail.com"
+repository-code: "https://github.com/FR-Xia/DDPACK"
+license: BSD-3-Clause
+
+url: "https://github.com/FR-Xia/DDPACK/releases/tag/v1.1.0"

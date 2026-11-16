@@ -1,0 +1,26 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "DDPACK",
+  "version": "1.1.0",
+  "description": "MATLAB and C++ package for finite-horizon nonlinear optimal control",
+  "license": "https://spdx.org/licenses/BSD-3-Clause",
+  "codeRepository": "https://github.com/FR-Xia/DDPACK",
+  "url": "https://github.com/FR-Xia/DDPACK/releases/tag/v1.1.0",
+  "programmingLanguage": [
+    "MATLAB",
+    "C++17"
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Feiran",
+      "familyName": "Xia",
+      "email": "beihesanx@gmail.com",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "Beijing Institute of Technology"
+      }
+    }
+  ]
+}

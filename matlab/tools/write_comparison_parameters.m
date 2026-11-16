@@ -1,0 +1,16 @@
+function write_comparison_parameters(problem, options, target)
+%WRITE_COMPARISON_PARAMETERS Save untimed quadratic-objective inputs for audit.
+parameters = struct('x0',problem.x0,'target',problem.xf,'u_max',problem.u_max, ...
+    'Q_f',problem.cost.Q_f,'Q_s',problem.cost.Q_s,'R',problem.cost.R, ...
+    'tf',problem.tf,'dt',problem.dt,'algorithm',options.Algorithm, ...
+    'max_iterations',options.MaxIterations,'alpha',options.Alpha, ...
+    'epsilon',options.Epsilon,'rho',options.Rho,'update_epsilon',options.UpdateEpsilon);
+for name={'geometric_refinement_iterations','geometric_refinement_knots', ...
+        'geometric_control_rate_weight','geometric_refinement_free_time','minimum_time','maximum_time'}
+    if isfield(problem,name{1}), parameters.(name{1})=problem.(name{1}); end
+end
+fid = fopen(fullfile(target,'parameters.json'),'w');
+assert(fid>=0,'Cannot write comparison parameters.');
+cleanup = onCleanup(@() fclose(fid)); %#ok<NASGU>
+fprintf(fid,'%s',jsonencode(parameters,'PrettyPrint',true));
+end
